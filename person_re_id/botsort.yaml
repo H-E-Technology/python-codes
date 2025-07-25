@@ -1,0 +1,14 @@
+tracker_type: botsort # トラッカータイプ
+track_high_thresh: 0.3   # 第一段階のアソシエーションのしきい値（低くすると、より多くの検出が高信頼度と見なされる）
+track_low_thresh: 0.1    # 第二段階のアソシエーションのしきい値（低くすると、より多くの低信頼度検出も追跡対象になる）
+new_track_thresh: 0.4    # 新しいトラックを作成するためのしきい値（高くすると新しいIDを作りにくい）
+track_buffer: 180        # トラックバッファサイズ（大きくすると、オブジェクトが一時的に見えなくなっても同じIDを維持）
+match_thresh: 0.65        # マッチングのしきい値（低くすると、より寛容なマッチングになる）
+fuse_score: True         # 検出スコアと追跡スコアを融合するかどうか
+
+# BotSORTの特有のパラメータ
+gmc_method: sparseOptFlow # グローバルモーション補償方法
+proximity_thresh: 0.5    # ReIDを使用する際の最小IoUしきい値
+appearance_thresh: 0.25  # ReIDの最小外観類似度しきい値（低くすると外観が少し変わっても同じIDと判断）
+with_reid: True          # ReIDを使用する（外観ベースのマッチングを有効化）
+model: auto              # 検出器がYOLOの場合はネイティブ特徴量を使用、それ以外の場合はyolo11n-cls.ptを使用
