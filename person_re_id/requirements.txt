@@ -1,0 +1,6 @@
+# YOLO Multi-Model Requirements
+ultralytics>=8.0.0
+opencv-python>=4.5.0
+numpy>=1.21.0
+pandas>=1.3.0
+PyYAML>=6.0

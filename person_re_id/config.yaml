@@ -1,0 +1,50 @@
+# YOLO Multi-Model Configuration
+
+# Model settings
+model:
+  path: "yolo11n-pose.pt"
+  conf_threshold: 0.3
+  iou_threshold: 0.4
+  agnostic_nms: false
+  max_det: 1000
+
+# Tracking settings
+tracking:
+  max_lost_frames: 30
+  max_hidden_frames: 60
+  center_area_ratio: 0.4
+  line_thickness: 2
+  draw_points: false
+  
+  # Matching thresholds
+  iou_threshold: 0.3
+  distance_threshold: 100
+  min_iou_for_distance: 0.1
+
+# Heatmap settings
+heatmap:
+  grid_x: 8
+  grid_y: 6
+  alpha: 0.6
+  colormap: "COLORMAP_HOT"  # OpenCV colormap name
+
+# Visualization settings
+visualization:
+  colors_count: 80
+  font_scale: 0.5
+  font_thickness: 1
+  bbox_thickness: 2
+  label_background_color: [30, 30, 30]
+  label_text_color: [255, 255, 255]
+  bbox_color: [0, 0, 225]
+
+# Output settings
+output:
+  fps: 15
+  codec: "mp4v"
+  create_output_dir: true
+  save_labels: true
+
+# Processing settings
+processing:
+  fps_update_interval: 10  # Update FPS display every N frames
