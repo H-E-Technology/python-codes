@@ -16,6 +16,8 @@ tracking:
   line_thickness: 2
   draw_points: false
   
+
+  
   # Matching thresholds
   iou_threshold: 0.3
   distance_threshold: 100
@@ -23,10 +25,23 @@ tracking:
 
 # Heatmap settings
 heatmap:
-  grid_x: 8
-  grid_y: 6
-  alpha: 0.6
+  grid_x: 16
+  grid_y: 12
+  alpha: 0.5
   colormap: "COLORMAP_HOT"  # OpenCV colormap name
+  use_custom_colormap: true # カスタムカラーマップを使用するか
+  custom_colormap_type: "black_to_red"  # black_to_red, blue_to_red, green_to_red, grayscale, rainbow
+  generate_simple: true     # 通行回数ベースのヒートマップを生成
+  generate_weighted: true   # 人数重み付きヒートマップを生成
+  generate_trajectory: true # 軌跡ベースのヒートマップを生成
+  trajectory_thickness: 15   # 軌跡の線の太さ（ピクセル）
+  trajectory_alpha: 0.4     # 軌跡ヒートマップの透明度
+  trajectory_intensity: 50  # 各軌跡の描画強度（0-255、重複すると加算）
+  
+  # グリッドヒートマップの格子設定
+  draw_grid_lines: true     # グリッドの境界線を描画するか
+  grid_line_color: [128, 128, 128]  # グリッド線の色 [B, G, R]
+  grid_line_thickness: 1    # グリッド線の太さ
 
 # Visualization settings
 visualization:
@@ -37,6 +52,8 @@ visualization:
   label_background_color: [30, 30, 30]
   label_text_color: [255, 255, 255]
   bbox_color: [0, 0, 225]
+  
+
 
 # Output settings
 output:
@@ -44,6 +61,27 @@ output:
   codec: "mp4v"
   create_output_dir: true
   save_labels: true
+  
+  # Heatmap output control
+  heatmaps:
+    enable: true                    # ヒートマップ出力を有効にするか
+    individual_classes: true        # クラス別ヒートマップを出力するか（例: heatmap_class_0.jpg）
+    combined_classes: true          # 統合ヒートマップを出力するか（例: heatmap_all_humans.jpg）
+    trajectory_heatmaps: true       # 軌跡ヒートマップを出力するか（例: trajectory_heatmap_class_0.jpg）
+    combined_trajectory: true       # 統合軌跡ヒートマップを出力するか（例: trajectory_all_humans.jpg）
+    
+  # Video output control  
+  video:
+    enable: true                    # 動画出力を有効にするか
+    show_trajectories: true         # 軌跡を動画に描画するか
+    show_detections: true           # 検出結果を動画に描画するか
+    show_track_ids: true            # トラックIDを表示するか
+    
+  # Statistics output
+  statistics:
+    enable: true                    # 統計情報出力を有効にするか
+    save_csv: true                  # CSV形式で統計を保存するか
+    save_json: true                 # JSON形式で統計を保存するか
 
 # Processing settings
 processing:

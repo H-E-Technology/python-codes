@@ -239,3 +239,48 @@ results = model.predict(source="test_image.jpg", save=True)
 - データセットの品質が学習結果に大きく影響します
 - 適切なデータ拡張とバランスの取れたクラス分布を心がけてください
 - 学習前にデータセットの可視化と検証を行うことを推奨します
+
+---
+
+# ヒートマップ生成ノートブック
+
+## notebooks/generate_heatmap/generate_heatmap.ipynb
+
+Google Colabで動画からヒートマップを生成するためのノートブックです。
+
+### 実行方法
+
+1. **Google Colabでノートブックを開く**
+   - `notebooks/generate_heatmap/generate_heatmap.ipynb`をGoogle Colabにアップロード
+   - GPU環境を有効化（Runtime > Change runtime type > GPU）
+
+2. **GitHub認証情報を設定**
+   - Colabのシークレット機能で`github_accesstoken`を設定
+   - または、コード内の認証情報を直接編集
+
+3. **動画ファイルを準備**
+   - 処理したい動画ファイル（例：`20250922_10_1min.mp4`）をアップロード
+   - 学習済みモデル（例：`finetuning_okinawa.pt`）をアップロード
+
+4. **実行**
+   - セルを上から順番に実行（基本的にEnterキーを押すだけ）
+   - 自動的にGitHubからコードをクローンし、ヒートマップを生成
+
+### 生成される出力
+
+- 処理済み動画（軌跡付き）
+- Adult/Child別ヒートマップ
+- 統合ヒートマップ
+- 軌跡ヒートマップ
+- 統計情報
+
+### 追加機能
+
+ノートブック内には動画のFPSを下げるスクリプトも含まれており、処理速度を向上させることができます。
+
+### 必要なファイル
+
+- 動画ファイル
+- 学習済みモデル（`finetuning_okinawa.pt`など）
+- データセット設定ファイル（`adult_child.yaml`）
+- GitHub認証情報（Colabシークレット）

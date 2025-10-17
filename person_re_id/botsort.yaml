@@ -11,4 +11,7 @@ gmc_method: sparseOptFlow # グローバルモーション補償方法
 proximity_thresh: 0.5    # ReIDを使用する際の最小IoUしきい値
 appearance_thresh: 0.25  # ReIDの最小外観類似度しきい値（低くすると外観が少し変わっても同じIDと判断）
 with_reid: True          # ReIDを使用する（外観ベースのマッチングを有効化）
+
+# 使えていなさそう
+# reid_weights: /content/osnet_x0_25_market_256x128_amsgrad_ep180_stp80_lr0.003_b128_fb10_softmax_labelsmooth_flip.pt
 model: auto              # 検出器がYOLOの場合はネイティブ特徴量を使用、それ以外の場合はyolo11n-cls.ptを使用
