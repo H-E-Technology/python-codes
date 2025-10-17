@@ -2,7 +2,7 @@
 
 # Model settings
 model:
-  path: "yolo11n-pose.pt"
+  path: "yolo11n.pt"
   conf_threshold: 0.3
   iou_threshold: 0.4
   agnostic_nms: false
@@ -57,7 +57,7 @@ visualization:
 
 # Output settings
 output:
-  fps: 15
+  fps: 5 # 入力動画と同じ fps を設定する
   codec: "mp4v"
   create_output_dir: true
   save_labels: true

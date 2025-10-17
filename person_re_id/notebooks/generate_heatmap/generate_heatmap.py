@@ -31,8 +31,9 @@ repo_url = f"https://{os.environ['GITHUB_USERNAME']}:{os.environ['GITHUB_TOKEN']
 # 遮蔽時以外の re-id を減らす処理を追加している
 !cp bot_sort.py /usr/local/lib/python*/dist-packages/ultralytics/trackers/bot_sort.py
 
+# model は google drive から取得する
 !python yolo_multi_model_refactored.py \
-  --source 20250922_10_1min.mp4 \
+  --source "20250922_10_1min_5fps.mp4" \
   --track \
   --model "finetuning_okinawa.pt" \
   --dataset-yaml "adult_child.yaml" \
