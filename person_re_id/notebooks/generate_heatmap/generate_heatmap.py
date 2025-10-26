@@ -11,6 +11,16 @@ from google.colab import userdata
 
 !pip install ultralytics > /dev/null
 
+"""### google drive をマウント"""
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+"""## settings for google colab"""
+
+# 任意のパス
+save_base_path = '/content/drive/MyDrive/HETech/output/heatmap/'
+
 import os
 os.environ['GITHUB_USERNAME'] = "shayaf"
 # NOTE: GitHub Token はハードコードせず、外部から渡してください... Colabの secret など
@@ -18,7 +28,11 @@ os.environ['GITHUB_TOKEN'] = userdata.get('github_accesstoken')
 
 repo_url = f"https://{os.environ['GITHUB_USERNAME']}:{os.environ['GITHUB_TOKEN']}@github.com/H-E-Technology/python-codes.git"
 
+"""## git clone"""
+
 !git clone $repo_url
+
+"""## execution"""
 
 # Commented out IPython magic to ensure Python compatibility.
 # %cd python-codes/person_re_id/
@@ -31,20 +45,33 @@ repo_url = f"https://{os.environ['GITHUB_USERNAME']}:{os.environ['GITHUB_TOKEN']
 # 遮蔽時以外の re-id を減らす処理を追加している
 !cp bot_sort.py /usr/local/lib/python*/dist-packages/ultralytics/trackers/bot_sort.py
 
+"""### 実行前の注意
+- 長い動画は fps を下げても問題ない場合が多い -> 下の fps 下げるスクリプトを活用。
+
+- /content/python-codes/person_re_id/config.yaml の確認
+    - l.60 fps設定を入力動画と同じ fps にする
+"""
+
 # model は google drive から取得する
 !python yolo_multi_model_refactored.py \
-  --source "20250922_10_1min_5fps.mp4" \
+  --source "/content/2025-10-21_10-26-35_5fps.mp4" \
   --track \
-  --model "finetuning_okinawa.pt" \
+  --model "/content/finetuning_okinawa.pt" \
   --dataset-yaml "adult_child.yaml" \
   --classes "0,1"
+
+# outputをzip化
+!zip -r /content/output_all.zip /content/python-codes/person_re_id/output
+
+# Driveに移動
+!mv /content/output_all.zip $save_base_path
 
 """## 動画の fps を下げるスクリプト🍴"""
 
 import cv2
 
-input_path = "sample1.mp4"
-output_path = "sample1_5fps.mp4"
+input_path = "/content/2025-10-21_10-26-35.mp4"
+output_path = "/content/2025-10-21_10-26-35_5fps.mp4"
 
 # 読み込み
 cap = cv2.VideoCapture(input_path)
@@ -79,3 +106,4 @@ cap.release()
 out.release()
 
 print(f"✅ Done! {input_path} を {fps_out}fps に変換しました: {output_path}")
+
